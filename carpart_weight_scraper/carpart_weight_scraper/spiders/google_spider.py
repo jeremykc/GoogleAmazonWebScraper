@@ -47,10 +47,9 @@ class GoogleSpider(scrapy.Spider):
     name = "google_spider"
     allowed_domains = ['proxy.scrapeops.io', 'google.com']
     custom_settings = {
-        'LOG_LEVEL': 'INFO',                                                                # DEBUG, INFO, WARNING, ERROR, CRITICAL
-        'RETRY_TIMES': 5,                                                                   # Max number of retries, in addition to the first download
-        'FEEDS': {'data/out/%(name)s_%(time)s.csv': {'format': 'csv', 'overwrite': True}},  # Specify export options
-        'FEED_EXPORT_FIELDS': ['partslink_number', 'link'],                                 # Specify which fields to export & order
+        # Specify export options
+        'FEEDS': {'data/out/%(name)s_%(time)s.csv': {'format': 'csv', 'overwrite': True}},
+        'FEED_EXPORT_FIELDS': ['partslink_number', 'link'],
     }
     
 

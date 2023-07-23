@@ -5,6 +5,13 @@ BOT_NAME = "carpart_weight_scraper"
 SPIDER_MODULES = ["carpart_weight_scraper.spiders"]
 NEWSPIDER_MODULE = "carpart_weight_scraper.spiders"
 
+LOG_LEVEL = 'INFO'                                                          # DEBUG, INFO, WARNING, ERROR, CRITICAL
+RETRY_TIMES = 5                                                             # Max number of retries, in addition to the first download
+
+
+# ------------------------------------------------------- #
+#                 Extensions & Middlewares                #
+# ------------------------------------------------------- #
 EXTENSIONS = {
     # ScrapeOps Monitor
     'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500,                     # Activate The ScrapeOps Monitor Extension
@@ -22,6 +29,7 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,        # Activate The Scrapy Rotating User Agents Middleware
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,     # Disable The Default User Agent Middleware
 }
+
 
 
 # ------------------------------------------------------- #
