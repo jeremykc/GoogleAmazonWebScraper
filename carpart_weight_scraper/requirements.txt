@@ -1,0 +1,5 @@
+scrapy>=2.9.0
+scrapeops-scrapy>=0.5.2
+scrapeops-scrapy-proxy-sdk
+scrapy-user-agents
+pandas>=2.0.3
