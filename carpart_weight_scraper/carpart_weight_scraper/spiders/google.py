@@ -64,7 +64,9 @@ class GoogleSpider(scrapy.Spider):
 
         idx=0; limit=3
         for partslink_number in partslink_numbers:
-            if idx >= limit: break; idx += 1
+            if idx >= limit: 
+                break; 
+            idx += 1
 
             # Append the partslink number to the query base
             query = 'site:amazon.com Partslink Number ' + partslink_number
@@ -86,10 +88,11 @@ class GoogleSpider(scrapy.Spider):
         # Extract first URL in SERP response, when JavaScript is disabled
         if not link:            
             link = response.xpath('(//h3/parent::div/parent::div/parent::a)/@href').get()
-            print('\nNOTE: JavaScript Disabled XPath selector used for', response.meta['partslink_number'], '\n')
+            print('\nNOTE: No link found... Trying JS Disabled XPath selector for', response.meta['partslink_number'])
         
         item_loader = GoogleSearchResultItemLoader(item=GoogleSearchResultItem(), response=response)
         item_loader.add_value('partslink_number', response.meta['partslink_number'])
         item_loader.add_value('link', link)
 
+        print(item_loader.load_item())
         yield item_loader.load_item()
