@@ -2,7 +2,6 @@
 import scrapy
 import os
 import pandas as pd
-from urllib.parse import urlparse
 from urllib.parse import urlencode
 from carpart_weight_scraper.items import GoogleSearchResultItem
 from carpart_weight_scraper.itemloaders import GoogleSearchResultItemLoader
@@ -28,12 +27,9 @@ def fetch_partslink_numbers():
     return pd.read_csv(partslink_numbers_file_path, header=None).iloc[:,0]
 
 
-def create_google_url(query, site=''):
-    """ Create a Google search URL from a query and an optional site """
+def create_google_url(query):
+    """ Create a Google search URL from a query """
     google_dict = {'q': query, 'num': 10, }
-    if site:
-        web = urlparse(site).netloc
-        google_dict['as_sitesearch'] = web
     return 'https://www.google.com/search?' + urlencode(google_dict)
 
 
