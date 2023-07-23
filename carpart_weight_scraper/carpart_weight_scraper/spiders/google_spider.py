@@ -1,4 +1,4 @@
-""" Scrape Google SERP for Amazon links to car parts. Collect the top link for each car part in a given list of IDs. """
+""" Scrape Google SERP for the top Amazon link for each car part in a given list of IDs. """
 import scrapy
 import os
 import pandas as pd
