@@ -1,3 +1,10 @@
+# Input
+*/data/in/parts_data.csv
+
+# Output
+*/data/out/
+crawls/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
