@@ -71,13 +71,13 @@ DOWNLOAD_DELAY = 3
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "carpart_weight_scraper.middlewares.GoogleCarpartScraperSpiderMiddleware": 543,
+#    "carpart_weight_scraper.middlewares.CarPartWeightScraperSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "carpart_weight_scraper.middlewares.GoogleCarpartScraperDownloaderMiddleware": 543,
+#    "carpart_weight_scraper.middlewares.CarPartWeightScraperDownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
@@ -89,7 +89,7 @@ DOWNLOAD_DELAY = 3
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    "carpart_weight_scraper.pipelines.GoogleCarpartScraperPipeline": 300,
+#    "carpart_weight_scraper.pipelines.CarPartWeightScraperPipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
