@@ -1,9 +1,8 @@
-# Input
-*/data/in/parts_data.csv
+# Input / Output
+*/data/
 
-# Output
-*/data/out/
-crawls/
+# Allow specific input data file
+!*/data/in/partslink_numbers.csv  
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
