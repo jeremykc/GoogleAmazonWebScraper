@@ -5,15 +5,9 @@ import pandas as pd
 from urllib.parse import urlencode
 from carpart_weight_scraper.items import GoogleSearchResultItem
 from carpart_weight_scraper.itemloaders import GoogleSearchResultItemLoader
+from .base_spider import BaseSpider
 
 
-# ------------------------------------------------------- #
-#                     Global Variables                    #
-# ------------------------------------------------------- #
-if 'SCRAPEOPS_API_KEY' in os.environ:
-    SCRAPEOPS_API_KEY = os.environ.get('SCRAPEOPS_API_KEY')
-else:
-    raise ValueError('SCRAPEOPS_API_KEY environment variable not set')
 
 
 # ------------------------------------------------------- #
@@ -33,17 +27,10 @@ def create_google_url(query):
     return 'https://www.google.com/search?' + urlencode(google_dict)
 
 
-def get_proxy_url(url):
-    """ Create a ScrapeOps Proxy URL from a given URL """
-    payload = {'api_key': SCRAPEOPS_API_KEY, 'url': url}
-    proxy_url = 'https://proxy.scrapeops.io/v1/?' + urlencode(payload)
-    return proxy_url
-
-
 # ------------------------------------------------------- #
 #                      Scrapy Spider                      #
 # ------------------------------------------------------- #
-class GoogleSpider(scrapy.Spider):
+class GoogleSpider(BaseSpider):
     name = "google_spider"
     allowed_domains = ['proxy.scrapeops.io', 'google.com']
     custom_settings = {
@@ -71,7 +58,7 @@ class GoogleSpider(scrapy.Spider):
             # TODO: use static, already encoded URL, to avoid encoding issues
 
             # Create a ScrapeOps Proxy URL from a Google search URL
-            google_url = get_proxy_url(google_url)
+            google_url = self.get_proxy_url(google_url)
             
             yield scrapy.Request(url=google_url, callback=self.parse, meta={'partslink_number': partslink_number})
 
