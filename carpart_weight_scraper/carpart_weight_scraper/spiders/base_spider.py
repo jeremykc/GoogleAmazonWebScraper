@@ -5,7 +5,7 @@ from scrapy import Spider
 class BaseSpider(Spider):
 
     def __init__(self, *args, **kwargs):
-        super(BaseSpider, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.SCRAPEOPS_API_KEY = self.get_scrapeops_api_key()
 
     def get_scrapeops_api_key(self):

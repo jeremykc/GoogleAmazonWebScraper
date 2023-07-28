@@ -13,7 +13,6 @@ class GoogleSpider(BaseSpider):
     allowed_domains = ['proxy.scrapeops.io', 'google.com']
     custom_settings = {
         # Specify export options
-        'FEEDS': {'data/out/%(name)s_%(time)s.csv': {'format': 'csv', 'overwrite': True}},
         'FEED_EXPORT_FIELDS': ['partslink_number', 'link'],
     }
     
@@ -45,8 +44,12 @@ class GoogleSpider(BaseSpider):
         # Extract first URL in SERP response, when JavaScript is disabled
         if not link:            
             link = response.xpath('(//h3/parent::div/parent::div/parent::a)/@href').get()
-            print('NOTE: No link found... Trying JS Disabled XPath selector for', response.meta['partslink_number'])
+            print(f'NOTE: Link not found for {response.meta["partslink_number"]}. Trying again with JS Disabled XPath selector...')
         
+        # Check if link is valid
+        if not link:
+            print(f'NOTE: Link not found for {response.meta["partslink_number"]}.')
+
         item_loader = GoogleSearchResultItemLoader(item=GoogleSearchResultItem(), response=response)
         item_loader.add_value('partslink_number', response.meta['partslink_number'])
         item_loader.add_value('link', link)

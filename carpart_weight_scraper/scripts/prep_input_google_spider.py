@@ -1,3 +1,7 @@
+""" 
+Prepare input data for Google Spider, from data scraped by Tiger Spider (seperate project). 
+Extract partslink numbers from car parts data file and save to CSV file.
+"""
 import os
 import pandas as pd
 

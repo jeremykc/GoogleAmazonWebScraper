@@ -13,7 +13,6 @@ class AmazonSpider(BaseSpider):
     allowed_domains = ['proxy.scrapeops.io', 'amazon.com']
     custom_settings = {
         # Specify export options
-        'FEEDS': {'data/out/%(name)s_%(time)s.csv': {'format': 'csv', 'overwrite': True}},
         'FEED_EXPORT_FIELDS': {
             'partslink_number': 'partslink_number', 
             'weight': 'weight (pounds)', 
