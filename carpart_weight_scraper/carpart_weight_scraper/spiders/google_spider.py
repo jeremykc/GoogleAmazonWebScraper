@@ -14,19 +14,25 @@ class GoogleSpider(BaseSpider):
     custom_settings = {
         # Specify export options
         'FEED_EXPORT_FIELDS': ['partslink_number', 'link'],
+
+        # Close spider after scraping a certain number of items
+        'CLOSESPIDER_ITEMCOUNT': 5000,
     }
     
 
+    def __init__(self, start=0, end=10, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.start = int(start)
+        self.end = int(end)
+
+
     def start_requests(self):
         # List of partslink numbers to search for on Google 
-        partslink_numbers = self.fetch_partslink_numbers()
+        partslink_numbers = self.fetch_partslink_numbers(self.start, self.end)
+        print(f'\npartslink_numbers:\n{partslink_numbers[:100]}\n')
+        
 
-        idx=0; limit=3
         for partslink_number in partslink_numbers:
-            if idx >= limit: 
-                break; 
-            idx += 1
-
             # Append the partslink number to base query
             query = 'site:amazon.com Partslink Number ' + partslink_number
             
@@ -61,13 +67,12 @@ class GoogleSpider(BaseSpider):
     # ------------------------------------------------------- #
     #                     Helper Functions                    #
     # ------------------------------------------------------- #
-    def fetch_partslink_numbers(self):
-        """ Fetch list of partslink numbers from a CSV file """
+    def fetch_partslink_numbers(self, start, end):
+        """ Fetch list of partslink numbers from a CSV file, and return a slice of the list """
         partslink_numbers_file_path = 'data/in/partslink_numbers.csv' 
         if not os.path.exists(partslink_numbers_file_path):
             raise FileNotFoundError(partslink_numbers_file_path, ': file not found')
-        return pd.read_csv(partslink_numbers_file_path, header=None).iloc[:,0]
-
+        return pd.read_csv(partslink_numbers_file_path, header=None).iloc[start:end,0]
 
     def create_google_url(self, query):
         """ Create a Google search URL from a query """
