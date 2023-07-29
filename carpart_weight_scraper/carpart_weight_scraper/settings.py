@@ -25,11 +25,12 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,               # Activate The ScrapeOps Monitor Retry Middleware
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,             # Disable The Default Retry Middleware
 
-    # Scrapy Rotating User Agents
-    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,        # Activate The Scrapy Rotating User Agents Middleware
+    # Scrapy Fake User Agent
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,     # Disable The Default User Agent Middleware
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,             # Disable The Default Retry Middleware
+    'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,      # Activate The Scrapy Fake User Agent Middleware
+    'scrapy_fake_useragent.middleware.RetryUserAgentMiddleware': 401,       # Activate The Scrapy Fake User Agent Retry Middleware
 }
-
 
 
 # ------------------------------------------------------- #
@@ -42,6 +43,19 @@ SCRAPEOPS_PROXY_ENABLED = True
 
 # Maximum concurrent requests for ScrapeOps Proxy (Free Limit)
 CONCURRENT_REQUESTS = 1
+
+
+# ------------------------------------------------------- #
+#                  Scrapy Fake User Agents                #
+# ------------------------------------------------------- #
+FAKEUSERAGENT_PROVIDERS = [
+    'scrapy_fake_useragent.providers.FakeUserAgentProvider',    # This is the first provider we'll try
+    'scrapy_fake_useragent.providers.FakerProvider',            # If FakeUserAgentProvider fails, we'll use faker to generate a user-agent string for us
+    'scrapy_fake_useragent.providers.FixedUserAgentProvider',   # Fall back to USER_AGENT value
+]
+
+# Set Fallback User-Agent
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
 
 
 # ------------------------------------------------------- #
