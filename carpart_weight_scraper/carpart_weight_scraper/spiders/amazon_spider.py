@@ -24,9 +24,16 @@ class AmazonSpider(BaseSpider):
     }
 
 
+    def __init__(self, start=0, end=10, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.start = int(start)
+        self.end = int(end)
+
+
     def start_requests(self):
         # List of dictionaries with amazon links to scrape
-        amazon_links_data = self.fetch_amazon_links()
+        amazon_links_data = self.fetch_amazon_links(self.start, self.end)
+        print(f'\namazon_links_data:\n{amazon_links_data[:100]}\n')
 
         for record in amazon_links_data:
             # Check if record is valid
@@ -60,9 +67,9 @@ class AmazonSpider(BaseSpider):
     # ------------------------------------------------------- #
     #                     Helper Functions                    #
     # ------------------------------------------------------- #
-    def fetch_amazon_links(self):
-        """ Return list of dictionaries with amazon links from a CSV file """
+    def fetch_amazon_links(self, start, end):
+        """ Fetch a list of dictionaries with amazon links from a CSV file, and return a slice of the list """
         amazon_links_file_path = 'data/in/amazon_links.csv'
         if not os.path.exists(amazon_links_file_path):
             raise FileNotFoundError(amazon_links_file_path, ': file not found')
-        return pd.read_csv(amazon_links_file_path).to_dict('records')
+        return pd.read_csv(amazon_links_file_path)[start:end].to_dict('records')

@@ -14,9 +14,6 @@ class GoogleSpider(BaseSpider):
     custom_settings = {
         # Specify export options
         'FEED_EXPORT_FIELDS': ['partslink_number', 'link'],
-
-        # Close spider after scraping a certain number of items
-        'CLOSESPIDER_ITEMCOUNT': 5000,
     }
     
 

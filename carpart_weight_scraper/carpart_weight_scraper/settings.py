@@ -7,6 +7,7 @@ NEWSPIDER_MODULE = "carpart_weight_scraper.spiders"
 
 LOG_LEVEL = 'INFO'                                                          # DEBUG, INFO, WARNING, ERROR, CRITICAL
 RETRY_TIMES = 5                                                             # Max number of retries, in addition to the first download
+CLOSESPIDER_ITEMCOUNT = 5000                                                # Close spider after scraping a certain number of items
 #FEEDS = {'data/out/%(name)s_%(time)s.csv': {'format': 'csv'}}              # Export filename & format (Backup settings)
 
 # ------------------------------------------------------- #
