@@ -12,15 +12,14 @@ class AmazonSpider(BaseSpider):
     name = 'amazon_spider'
     allowed_domains = ['proxy.scrapeops.io', 'amazon.com']
     custom_settings = {
-        # Specify export options
         'FEED_EXPORT_FIELDS': {
-            'partslink_number': 'partslink_number', 
-            'weight': 'weight (pounds)', 
+            'partslink_number': 'partslink_number',
+            'weight': 'weight (pounds)',
             'link':'link'
         },
 
         # Specify pipeline to use
-        'ITEM_PIPELINES': {'carpart_weight_scraper.pipelines.WeightConversionPipeline': 300},          
+        'ITEM_PIPELINES': {'carpart_weight_scraper.pipelines.WeightConversionPipeline': 300},
     }
 
 
@@ -71,5 +70,5 @@ class AmazonSpider(BaseSpider):
         """ Fetch a list of dictionaries with amazon links from a CSV file, and return a slice of the list """
         amazon_links_file_path = 'data/in/amazon_links.csv'
         if not os.path.exists(amazon_links_file_path):
-            raise FileNotFoundError(amazon_links_file_path, ': file not found')
+            raise FileNotFoundError(f'Input file not found: {amazon_links_file_path}')
         return pd.read_csv(amazon_links_file_path)[start:end].to_dict('records')

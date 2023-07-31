@@ -10,6 +10,7 @@ RETRY_TIMES = 5                                                             # Ma
 CLOSESPIDER_ITEMCOUNT = 5000                                                # Close spider after scraping a certain number of items
 #FEEDS = {'data/out/%(name)s_%(time)s.csv': {'format': 'csv'}}              # Export filename & format (Backup settings)
 
+
 # ------------------------------------------------------- #
 #                 Extensions & Middlewares                #
 # ------------------------------------------------------- #
@@ -42,8 +43,8 @@ SCRAPEOPS_API_KEY = os.environ.get('SCRAPEOPS_API_KEY')
 # Enable The ScrapeOps Proxy Aggregator
 SCRAPEOPS_PROXY_ENABLED = True
 
-# Maximum concurrent requests for ScrapeOps Proxy (Free Limit)
-CONCURRENT_REQUESTS = 1
+# Maximum concurrent requests for ScrapeOps Proxy
+CONCURRENT_REQUESTS = 1     # Free Plan: 1, 250K Credits: 5, 500K Credits: 10
 
 
 # ------------------------------------------------------- #

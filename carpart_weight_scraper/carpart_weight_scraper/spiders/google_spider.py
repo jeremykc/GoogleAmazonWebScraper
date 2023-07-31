@@ -12,7 +12,6 @@ class GoogleSpider(BaseSpider):
     name = "google_spider"
     allowed_domains = ['proxy.scrapeops.io', 'google.com']
     custom_settings = {
-        # Specify export options
         'FEED_EXPORT_FIELDS': ['partslink_number', 'link'],
     }
     
@@ -28,14 +27,13 @@ class GoogleSpider(BaseSpider):
         partslink_numbers = self.fetch_partslink_numbers(self.start, self.end)
         print(f'\npartslink_numbers:\n{partslink_numbers[:100]}\n')
         
-
         for partslink_number in partslink_numbers:
             # Append the partslink number to base query
             query = 'site:amazon.com Partslink Number ' + partslink_number
             
             yield scrapy.Request(
                 url=self.get_proxy_url(self.create_google_url(query)), 
-                callback=self.parse, 
+                callback=self.parse,
                 meta={'partslink_number': partslink_number}
             )
 
@@ -68,7 +66,7 @@ class GoogleSpider(BaseSpider):
         """ Fetch list of partslink numbers from a CSV file, and return a slice of the list """
         partslink_numbers_file_path = 'data/in/partslink_numbers.csv' 
         if not os.path.exists(partslink_numbers_file_path):
-            raise FileNotFoundError(partslink_numbers_file_path, ': file not found')
+            raise FileNotFoundError(f'Input file not found: {partslink_numbers_file_path}')
         return pd.read_csv(partslink_numbers_file_path, header=None).iloc[start:end,0]
 
     def create_google_url(self, query):

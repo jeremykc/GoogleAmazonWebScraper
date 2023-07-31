@@ -3,6 +3,7 @@ import os
 import subprocess
 import pandas as pd
 
+
 class BatchRunSpider:
     def __init__(self, spider_name, input_filepath, batch_size=10):
         """ Constructor for the BatchRunSpider class.

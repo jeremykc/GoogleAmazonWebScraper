@@ -2,8 +2,9 @@ import os
 from urllib.parse import urlencode
 from scrapy import Spider
 
-class BaseSpider(Spider):
 
+class BaseSpider(Spider):
+    """ Base spider with shared functionality for spiders to inherit from. """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.SCRAPEOPS_API_KEY = self.get_scrapeops_api_key()
