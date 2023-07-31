@@ -1,5 +1,4 @@
 scrapy>=2.9.0
 scrapeops-scrapy>=0.5.2
 scrapeops-scrapy-proxy-sdk
-scrapy-fake-useragent>=1.4.4
 pandas>=2.0.3

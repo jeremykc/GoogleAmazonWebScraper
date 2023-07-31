@@ -20,18 +20,15 @@ EXTENSIONS = {
 }
 
 DOWNLOADER_MIDDLEWARES = {
+    # ScrapeOps Fake Browser Headers Middleware
+    'carpart_weight_scraper.middlewares.ScrapeOpsFakeBrowserHeadersMiddleware': 400,        # Activate The Fake Browser Headers Middleware
+
     # ScrapeOps Proxy
     'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725,   # Activate The ScrapeOps Proxy SDK Middleware
 
     # ScrapeOps Monitor
     'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,               # Activate The ScrapeOps Monitor Retry Middleware
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,             # Disable The Default Retry Middleware
-
-    # Scrapy Fake User Agent
-    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,     # Disable The Default User Agent Middleware
-    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,             # Disable The Default Retry Middleware
-    'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,      # Activate The Scrapy Fake User Agent Middleware
-    'scrapy_fake_useragent.middleware.RetryUserAgentMiddleware': 401,       # Activate The Scrapy Fake User Agent Retry Middleware
 }
 
 
@@ -40,24 +37,14 @@ DOWNLOADER_MIDDLEWARES = {
 # ------------------------------------------------------- #
 SCRAPEOPS_API_KEY = os.environ.get('SCRAPEOPS_API_KEY')
 
+# Enable The ScrapeOps Fake Browser Header Middleware
+SCRAPEOPS_FAKE_HEADERS_ENABLED = True
+
 # Enable The ScrapeOps Proxy Aggregator
 SCRAPEOPS_PROXY_ENABLED = True
 
 # Maximum concurrent requests for ScrapeOps Proxy
 CONCURRENT_REQUESTS = 1     # Free Plan: 1, 250K Credits: 5, 500K Credits: 10
-
-
-# ------------------------------------------------------- #
-#                  Scrapy Fake User Agents                #
-# ------------------------------------------------------- #
-FAKEUSERAGENT_PROVIDERS = [
-    'scrapy_fake_useragent.providers.FakeUserAgentProvider',    # This is the first provider we'll try
-    'scrapy_fake_useragent.providers.FakerProvider',            # If FakeUserAgentProvider fails, we'll use faker to generate a user-agent string for us
-    'scrapy_fake_useragent.providers.FixedUserAgentProvider',   # Fall back to USER_AGENT value
-]
-
-# Set Fallback User-Agent
-USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
 
 
 # ------------------------------------------------------- #
