@@ -12,4 +12,4 @@ class AmazonProductItemLoader(ItemLoader):
     default_output_processor = TakeFirst()
     
     # Remove whitespace and unicode characters from weight
-    weight_in = MapCompose(lambda x: x.strip().replace('\u200e', ''))
+    weight_in = MapCompose(lambda x: x.strip().replace('\u200e', '').replace('&lrm;', ''))
