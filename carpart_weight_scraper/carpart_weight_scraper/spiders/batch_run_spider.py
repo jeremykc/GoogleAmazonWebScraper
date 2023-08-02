@@ -62,6 +62,7 @@ class BatchRunSpider:
         # Get total number of items to scrape
         total_items = self.get_item_count()
         print(f'[{self.spider_name}] Total items to scrape: {total_items}')
+        #total_items = 13  # FOR TESTING 
 
         # Run spider in batches
         for i in range(0, total_items, self.batch_size):
@@ -93,9 +94,9 @@ if __name__ == "__main__":
     os.chdir(os.path.join(os.getcwd(), os.pardir, os.pardir))
 
     # Create batch spider instances
-    google_spider = BatchRunSpider('google_spider', 'data/in/partslink_numbers.csv')
-    amazon_spider = BatchRunSpider('amazon_spider', 'data/in/amazon_links.csv')
+    google_spider = BatchRunSpider('google_spider', 'data/in/partslink_numbers.csv', 5000)
+    amazon_spider = BatchRunSpider('amazon_spider', 'data/in/amazon_links.csv', 5000)
 
     # Run spiders in batches
     google_spider.run()
-    amazon_spider.run()
+    #amazon_spider.run()
