@@ -32,12 +32,11 @@ class AmazonSpider(BaseSpider):
     def start_requests(self):
         # List of dictionaries with amazon links to scrape
         amazon_links_data = self.fetch_amazon_links(self.start, self.end)
-        print(f'\namazon_links_data:\n{amazon_links_data[:100]}\n')
 
         for record in amazon_links_data:
             # Check if record is valid
             if not isinstance(record,dict) or 'link' not in record or not isinstance(record['link'], str):
-                print('Invalid entry:', record, type(record), '\n')
+                print('Invalid entry, no link provided:', record, type(record), '\n')
                 continue
             
             # Create request
