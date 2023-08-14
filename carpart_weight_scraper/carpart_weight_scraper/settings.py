@@ -44,7 +44,7 @@ SCRAPEOPS_FAKE_HEADERS_ENABLED = True
 SCRAPEOPS_PROXY_ENABLED = True
 
 # ScrapeOps Proxy Settings
-SCRAPEOPS_PROXY_SETTINGS = {'country': 'us'}
+#SCRAPEOPS_PROXY_SETTINGS = {'country': 'us'}
 
 # Maximum concurrent requests for ScrapeOps Proxy
 CONCURRENT_REQUESTS = 10    # Free Plan: 1, 250K Credits: 5, 500K Credits: 10
