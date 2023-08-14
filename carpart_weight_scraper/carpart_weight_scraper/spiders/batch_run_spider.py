@@ -55,10 +55,6 @@ class BatchRunSpider:
     #                       Main Funtion                      #
     # ------------------------------------------------------- #
     def run(self):
-        # Delete output file if it already exists
-        if os.path.exists(self.output_filepath):
-            os.remove(self.output_filepath)
-
         # Get total number of items to scrape
         total_items = self.get_item_count()
         print(f'[{self.spider_name}] Total items to scrape: {total_items}')
