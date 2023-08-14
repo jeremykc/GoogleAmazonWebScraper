@@ -29,8 +29,8 @@ class GoogleSpider(BaseSpider):
         
         for partslink_number in partslink_numbers:
             # Append the partslink number to base query
-            query = 'site:amazon.com Partslink Number ' + partslink_number
-            
+            query = 'site:amazon.com Partslink ' + partslink_number
+
             yield scrapy.Request(
                 url=self.get_proxy_url(self.create_google_url(query)), 
                 callback=self.parse,
