@@ -25,7 +25,6 @@ class GoogleSpider(BaseSpider):
     def start_requests(self):
         # List of partslink numbers to search for on Google 
         partslink_numbers = self.fetch_partslink_numbers(self.start, self.end)
-        print(f'\npartslink_numbers:\n{partslink_numbers[:100]}\n')
         
         for partslink_number in partslink_numbers:
             # Append the partslink number to base query
