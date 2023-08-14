@@ -50,7 +50,7 @@ class AmazonSpider(BaseSpider):
 
     def parse(self, response):
         # Extract weight from page
-        weight = response.xpath('//th[normalize-space(text())="Item Weight"]/following-sibling::td/text()').extract_first()
+        weight = response.xpath('//th[contains(text(), "Item Weight")]/following-sibling::td/text()').extract_first()
         if not weight:
             print('Weight not found for', response.meta['partslink_number'], 'at:', response.meta['link'])
 
