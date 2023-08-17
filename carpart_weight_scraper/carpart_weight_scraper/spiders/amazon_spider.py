@@ -2,7 +2,6 @@
 import scrapy
 import os
 import pandas as pd
-from urllib.parse import urlencode
 from .base_spider import BaseSpider
 from ..items import AmazonProductItem
 from ..itemloaders import AmazonProductItemLoader
